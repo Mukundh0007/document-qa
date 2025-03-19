@@ -65,15 +65,15 @@ if document and prompt:
 
     # Push the test.py file to the GitHub repository.
     repo_url = f"https://{PAT}@github.com/Mukundh0007/PJTmain.git"
-    subprocess.run(["git", "init", "/workspaces/document-qa/PJTmain"])
-    subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "remote", "set-url", "origin", repo_url])
-    subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "config", "pull.rebase", "false"])  # Set pull strategy to merge
-    subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "pull", "origin", "main"])  # Pull changes from the remote repository
-    subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "add", "test.py"])
-    subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "commit", "-m", "Add test.py"])
-    subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "push", "-u", "origin", "main", "--force"])  # Force push to the remote repository
+    # subprocess.run(["git", "init", "/workspaces/document-qa/PJTmain"])
+    # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "remote", "set-url", "origin", repo_url])
+    # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "config", "pull.rebase", "false"])  # Set pull strategy to merge
+    # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "pull", "origin", "main"])  # Pull changes from the remote repository
+    # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "add", "test.py"])
+    # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "commit", "-m", "Add test.py"])
+    # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "push", "-u", "origin", "main", "--force"])  # Force push to the remote repository
     
     # Send a curl request to the specified URL.
-    subprocess.run([
-        "curl", "-X", "POST", "http://98.70.35.30:5000/update"
-    ])
+    # subprocess.run([
+    #     "curl", "-X", "POST", "http://98.70.35.30:5000/update"
+    # ])
