@@ -18,6 +18,7 @@ st.title("📄 AI Software Manager")
 GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 client = Groq(api_key=GROQ_API_KEY) # Replace with your OpenAI API key
 PAT = st.secrets["GitPAT"]
+
 # Use the specified file instead of file uploader
 file_path = "/workspaces/document-qa/PJTmain/codeV2.py"
 with open(file_path, "r") as file:
