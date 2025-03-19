@@ -18,6 +18,9 @@ st.title("📄 AI Software Manager")
 GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 client = Groq(api_key=GROQ_API_KEY) # Replace with your OpenAI API key
 PAT = st.secrets["GitPAT"]
+repo_url = f"https://{PAT}@github.com/Mukundh0007/PJTmain.git"
+subprocess.run(["rm", "-rf", "/workspaces/document-qa/PJTmain"])
+subprocess.run(["git", "clone", repo_url, "/workspaces/document-qa/PJTmain"])
 
 # Use the specified file instead of file uploader
 file_path = "/workspaces/document-qa/PJTmain/codeV2.py"
@@ -64,7 +67,7 @@ if document and prompt:
             except:pass
 
     # Push the test.py file to the GitHub repository.
-    repo_url = f"https://{PAT}@github.com/Mukundh0007/PJTmain.git"
+
     # subprocess.run(["git", "init", "/workspaces/document-qa/PJTmain"])
     # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "remote", "set-url", "origin", repo_url])
     # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "config", "pull.rebase", "false"])  # Set pull strategy to merge
@@ -77,3 +80,4 @@ if document and prompt:
     # subprocess.run([
     #     "curl", "-X", "POST", "http://98.70.35.30:5000/update"
     # ])
+    st.write("The code has been modified based on your request. Please check the server.")
