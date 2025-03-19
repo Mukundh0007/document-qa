@@ -3,7 +3,7 @@ import streamlit as st
 from groq import Groq
 import subprocess
 import os
-
+import time
 
 def remove_pjt():
     if os.path.exists(f"{cwd}/PJTmain"):
@@ -83,27 +83,24 @@ if document and prompt:
     subprocess.run(["git", "-C", f"{cwd}/PJTmain", "push", "-u", "origin", "main", "--force"])  # Force push to the remote repository
     
     # Send a curl request to the specified URL.
-    # subprocess.run([
-    #     "curl", "-X", "POST", "http://98.70.35.30:5000/update"
-    # ])
-
+    subprocess.run([ "curl", "http://98.70.35.30:5000/update"])
     st.write("The code has been modified based on your request. Please check the server.")
+
+    remove_pjt()
     # Add OK and NG buttons
-    col1, col2 = st.columns(2)
+    # col1, col2 = st.columns(2)
 
-    with col1:
-        if st.button("OK"):
-            # Copy the content of test.py to codeV2.py
-            test_file_path = f"{cwd}/PJTmain/test.py"
-            with open(test_file_path, "r") as test_file:
-                modified_code = test_file.read()
-            with open(file_path, "w") as code_file:
-                code_file.write(modified_code)
-            st.write("The code has been updated successfully.")
+    # with col1:
+    #     if st.button("OK"):
+    #         # Copy the content of test.py to codeV2.py
+    #         test_file_path = f"{cwd}/PJTmain/test.py"
+    #         with open(test_file_path, "r") as test_file:
+    #             modified_code = test_file.read()
+    #         with open(file_path, "w") as code_file:
+    #             code_file.write(modified_code)
+    #         st.write("The code has been updated successfully.")
 
-    with col2:
-        if st.button("NG"):
-            # Restart the code by re-running the script
-            st.experimental_rerun()
-
-remove_pjt()
+    # with col2:
+    #     if st.button("NG"):
+    #         # Restart the code by re-running the script
+    #         st.experimental_rerun()
