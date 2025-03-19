@@ -4,28 +4,23 @@ from groq import Groq
 import subprocess
 import os
 
+
+def remove_pjt():
+    if os.path.exists(f"{cwd}/PJTmain"):
+        subprocess.run(["rm", "-rf", f"{cwd}/PJTmain"])
+    return
 # Get the current working directory
 cwd = os.getcwd()
 
 # Show title and description.
 st.title("📄 AI Software Manager")
-# st.write(
-#     "Upload a document below and ask a question about it – GPT will answer! "
-#     "To use this app, you need to provide an OpenAI API key, which you can get [here](https://platform.openai.com/account/api-keys). "
-# )
 
-# Ask user for their OpenAI API key via `st.text_input`.
-# Alternatively, you can store the API key in `./.streamlit/secrets.toml` and access it
-# via `st.secrets`, see https://docs.streamlit.io/develop/concepts/connections/secrets-management
-#openai_api_key = st.text_input("OpenAI API Key", type="password")
-
-    # Create an OpenAI client.
+# Create an AI client.
 GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 client = Groq(api_key=GROQ_API_KEY) # Replace with your OpenAI API key
 PAT = st.secrets["GitPAT"]
 repo_url = f"https://{PAT}@github.com/Mukundh0007/PJTmain.git"
-if os.path.exists(f"{cwd}/PJTmain"):
-    subprocess.run(["rm", "-rf", f"{cwd}/PJTmain"])
+
 subprocess.run(["git", "clone", repo_url, f"{cwd}/PJTmain"])
 
 # Use the specified file instead of file uploader
@@ -56,22 +51,27 @@ if document and prompt:
         }
     ]
 
-    # Generate an answer using the OpenAI API.
-    stream = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=messages,
-        stream=True,
-    )
+    # Generate an answer using the API.
+    try:
+        stream = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=messages,
+            stream=True,
+        )
 
-    # Write the response to a test.py file.
-    with open(f"{cwd}/PJTmain/test.py", "w") as test_file:
-        for chunk in stream:
-            content = chunk.choices[0].delta.content
+        # Write the response to a test.py file.
+        with open(f"{cwd}/PJTmain/test.py", "w") as test_file:
+            for chunk in stream:
+                content = chunk.choices[0].delta.content
+                try:
+                    if content.strip() not in ["```python","python", "```"]:
+                        test_file.write(content)
+                except:pass
+    except Exception as e:
+        with open(f"{cwd}/PJTmain/test.py", "w") as test_file:
             try:
-                if content.strip() not in ["```python","python", "```"]:
-                    test_file.write(content)
+                test_file.write(document)
             except:pass
-
     # Push the test.py file to the GitHub repository.
 
     subprocess.run(["git", "init", f"{cwd}/PJTmain"])
@@ -86,4 +86,24 @@ if document and prompt:
     # subprocess.run([
     #     "curl", "-X", "POST", "http://98.70.35.30:5000/update"
     # ])
+
     st.write("The code has been modified based on your request. Please check the server.")
+    # Add OK and NG buttons
+    col1, col2 = st.columns(2)
+
+    with col1:
+        if st.button("OK"):
+            # Copy the content of test.py to codeV2.py
+            test_file_path = f"{cwd}/PJTmain/test.py"
+            with open(test_file_path, "r") as test_file:
+                modified_code = test_file.read()
+            with open(file_path, "w") as code_file:
+                code_file.write(modified_code)
+            st.write("The code has been updated successfully.")
+
+    with col2:
+        if st.button("NG"):
+            # Restart the code by re-running the script
+            st.experimental_rerun()
+
+remove_pjt()
