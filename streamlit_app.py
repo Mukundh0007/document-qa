@@ -22,7 +22,8 @@ client = Groq(api_key=GROQ_API_KEY) # Replace with your OpenAI API key
 PAT = st.secrets["GitPAT"]
 repo_url = f"https://{PAT}@github.com/Mukundh0007/PJTmain.git"
 
-subprocess.run(["git", "clone", repo_url, f"{cwd}/PJTmain"])
+if not os.path.exists(f"{cwd}/PJTmain"):
+    subprocess.run(["git", "clone", repo_url, f"{cwd}/PJTmain"])
 
 # Use the specified file instead of file uploader
 file_path = f"{cwd}/PJTmain/codeV2.py"
