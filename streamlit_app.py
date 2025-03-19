@@ -74,6 +74,6 @@ if document and prompt:
     subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "push", "-u", "origin", "main", "--force"])  # Force push to the remote repository
     
     # Send a curl request to the specified URL.
-    # subprocess.run([
-    #     "curl", "-X", "POST", "http://98.70.35.30:5000/update"
-    # ])
+    subprocess.run([
+        "curl", "-X", "POST", "http://98.70.35.30:5000/update"
+    ])
