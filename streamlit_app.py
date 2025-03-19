@@ -83,7 +83,7 @@ if document and prompt:
     subprocess.run(["git", "-C", f"{cwd}/PJTmain", "push", "-u", "origin", "main", "--force"])  # Force push to the remote repository
     
     # Send a curl request to the specified URL.
-    subprocess.run([ "curl", "http://98.70.35.30:5000/update"])
+    subprocess.run([ "curl", "https://shorturl.at/RPh5W/update"])
     st.write("The code has been modified based on your request. Please check the server.")
 
     remove_pjt()
