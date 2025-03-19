@@ -2,6 +2,7 @@ import streamlit as st
 # from openai import OpenAI
 from groq import Groq
 import subprocess
+import os
 # Show title and description.
 st.title("📄 AI Software Manager")
 # st.write(
@@ -19,7 +20,8 @@ GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 client = Groq(api_key=GROQ_API_KEY) # Replace with your OpenAI API key
 PAT = st.secrets["GitPAT"]
 repo_url = f"https://{PAT}@github.com/Mukundh0007/PJTmain.git"
-subprocess.run(["rm", "-rf", "/workspaces/document-qa/PJTmain"])
+if os.path.exists("/workspaces/document-qa/PJTmain"):
+    subprocess.run(["rm", "-rf", "/workspaces/document-qa/PJTmain"])
 subprocess.run(["git", "clone", repo_url, "/workspaces/document-qa/PJTmain"])
 
 # Use the specified file instead of file uploader
@@ -68,13 +70,13 @@ if document and prompt:
 
     # Push the test.py file to the GitHub repository.
 
-    # subprocess.run(["git", "init", "/workspaces/document-qa/PJTmain"])
-    # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "remote", "set-url", "origin", repo_url])
-    # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "config", "pull.rebase", "false"])  # Set pull strategy to merge
-    # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "pull", "origin", "main"])  # Pull changes from the remote repository
-    # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "add", "test.py"])
-    # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "commit", "-m", "Add test.py"])
-    # subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "push", "-u", "origin", "main", "--force"])  # Force push to the remote repository
+    subprocess.run(["git", "init", "/workspaces/document-qa/PJTmain"])
+    subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "remote", "set-url", "origin", repo_url])
+    subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "config", "pull.rebase", "false"])  # Set pull strategy to merge
+    subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "pull", "origin", "main"])  # Pull changes from the remote repository
+    subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "add", "test.py"])
+    subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "commit", "-m", "Add test.py"])
+    subprocess.run(["git", "-C", "/workspaces/document-qa/PJTmain", "push", "-u", "origin", "main", "--force"])  # Force push to the remote repository
     
     # Send a curl request to the specified URL.
     # subprocess.run([
