@@ -4,6 +4,7 @@ from groq import Groq
 import subprocess
 import os
 import time
+import atexit
 
 def remove_pjt():
     if os.path.exists(f"{cwd}/PJTmain"):
@@ -85,8 +86,6 @@ if document and prompt:
     # Send a curl request to the specified URL.
     subprocess.run([ "curl", f"http://{vm_ip}/update"])
     st.write("The code has been modified based on your request. Please check the server.")
-
-    remove_pjt()
     # Add OK and NG buttons
     # col1, col2 = st.columns(2)
 
@@ -104,3 +103,5 @@ if document and prompt:
     #     if st.button("NG"):
     #         # Restart the code by re-running the script
     #         st.experimental_rerun()
+
+atexit.register(remove_pjt)
