@@ -11,7 +11,7 @@ def remove_pjt():
     return
 # Get the current working directory
 cwd = os.getcwd()
-
+vm_ip = st.secrets["VM_IP"]
 # Show title and description.
 st.title("📄 AI Software Manager")
 
@@ -83,7 +83,7 @@ if document and prompt:
     subprocess.run(["git", "-C", f"{cwd}/PJTmain", "push", "-u", "origin", "main", "--force"])  # Force push to the remote repository
     
     # Send a curl request to the specified URL.
-    subprocess.run([ "curl", "https://shorturl.at/RPh5W/update"])
+    subprocess.run([ "curl", f"http://{vm_ip}/update"])
     st.write("The code has been modified based on your request. Please check the server.")
 
     remove_pjt()
