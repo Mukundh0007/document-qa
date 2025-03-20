@@ -74,7 +74,8 @@ GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 client = Groq(api_key=GROQ_API_KEY) # Replace with your OpenAI API key
 PAT = st.secrets["GitPAT"]
 repo_url = f"https://{PAT}@github.com/Mukundh0007/PJTmain.git"
-
+subprocess.run(["git", "config", "--global", "user.email", "mukundh173@gmail.com"])
+subprocess.run(["git", "config", "--global", "user.name", "Mukundh0007"])
 if not os.path.exists(f"{cwd}/PJTmain"):
     subprocess.run(["git", "clone", repo_url, f"{cwd}/PJTmain"])
 
