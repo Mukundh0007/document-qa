@@ -42,6 +42,7 @@ def prompt_and_update():
                             test_file.write(content)
                     except:pass
         except Exception as e:
+            print(e)
             with open(f"{cwd}/PJTmain/test.py", "w") as test_file:
                 try:
                     test_file.write(document)
