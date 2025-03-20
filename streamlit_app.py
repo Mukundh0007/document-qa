@@ -92,5 +92,4 @@ with st.form(key='prompt_form', clear_on_submit=True):
     submit_button = st.form_submit_button(label='Submit',use_container_width=True)
     if submit_button:
         prompt_and_update()
-
 atexit.register(remove_pjt)
