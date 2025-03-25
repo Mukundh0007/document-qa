@@ -80,7 +80,7 @@ if not os.path.exists(f"{cwd}/PJTmain"):
     subprocess.run(["git", "clone", repo_url, f"{cwd}/PJTmain"])
 
 # Use the specified file instead of file uploader
-file_path = f"{cwd}/PJTmain/codeV2.py"
+file_path = f"{cwd}/PJTmain/test.py"
 with open(file_path, "r") as file:
     document = file.read()
 
