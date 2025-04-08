@@ -95,5 +95,5 @@ with st.form(key='prompt_form', clear_on_submit=True):
     if submit_button:
         prompt_and_update()
     
-st.link_button("Go to gallery", "https://streamlit.io/gallery") #
+st.link_button("Go to server", "https://shorturl.at/ZvZEU") #
 atexit.register(remove_pjt)
